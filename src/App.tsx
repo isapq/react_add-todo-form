@@ -19,8 +19,8 @@ export const App = () => {
   const [titleError, setTitleError] = useState(false);
   const [userError, setUserError] = useState(false);
 
-  const handleAddTodo = e => {
-    e.preventDefault();
+  const handleAddTodo = event => {
+    event.preventDefault();
 
     setTitleError(false);
     setUserError(false);
@@ -43,8 +43,10 @@ export const App = () => {
 
     const userObj = usersFromServer.find(u => u.id === Number(selectedUser));
 
+    const maxId = todos.reduce((max, todo) => Math.max(max, todo.id), 0);
+
     const newTodo = {
-      id: todos.length + 1,
+      id: maxId + 1,
       title: title.trim(),
       completed: false,
       userId: userObj.id,
@@ -101,7 +103,7 @@ export const App = () => {
           {userError && <span className="error">Please choose a user</span>}
         </div>
 
-        <button type="submit" data-cy="submitButton" onClick={handleAddTodo}>
+        <button type="submit" data-cy="submitButton" onSubmit={handleAddTodo}>
           Add
         </button>
       </form>
