@@ -62,14 +62,14 @@ export const App = () => {
     <div className="App">
       <h1>Add todo form</h1>
 
-      <form>
+      <form onSubmit={handleAddTodo}>
         <div className="field">
           <input
             type="text"
             data-cy="titleInput"
             value={title}
-            onChange={e => {
-              setTitle(e.target.value);
+            onChange={event => {
+              setTitle(event.target.value);
               if (titleError) {
                 setTitleError(false);
               }
@@ -82,8 +82,8 @@ export const App = () => {
           <select
             data-cy="userSelect"
             value={selectedUser}
-            onChange={e => {
-              setSelectedUser(e.target.value);
+            onChange={event => {
+              setSelectedUser(event.target.value);
               if (userError) {
                 setUserError(false);
               }
@@ -103,7 +103,7 @@ export const App = () => {
           {userError && <span className="error">Please choose a user</span>}
         </div>
 
-        <button type="submit" data-cy="submitButton" onSubmit={handleAddTodo}>
+        <button type="submit" data-cy="submitButton">
           Add
         </button>
       </form>
